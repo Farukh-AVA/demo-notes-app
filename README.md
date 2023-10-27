@@ -1,4 +1,4 @@
-# Scratch - Your App's Name
+# Scratch
 
 Scratch is a production-ready web application that provides users with a platform to create and manage notes, handle attachments, process payments, and more. 
 It's built using React.js and AWS [Serverless](https://aws.amazon.com/serverless/) Services to ensure a secure, scalable, and responsive user experience.
