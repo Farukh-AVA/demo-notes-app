@@ -7,6 +7,7 @@ import { useAppContext } from "../lib/contextLib";
 import { Auth } from "aws-amplify";
 import { onError } from "../lib/errorLib";
 import { ISignUpResult } from "amazon-cognito-identity-js";
+import { BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs";
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
 
@@ -21,6 +22,7 @@ export default function Signup() {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
+  const [showPassward, setShowPassward] = useState(false); 
 
   function validateForm() {
     return (
@@ -32,6 +34,10 @@ export default function Signup() {
 
   function validateConfirmationForm() {
     return fields.confirmationCode.length > 0;
+  }
+
+  function togglePassward(){
+    setShowPassward(prevShowPassward => !prevShowPassward)
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -110,10 +116,13 @@ export default function Signup() {
             />
           </Form.Group>
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>
+              Password {showPassward ? <BsFillEyeFill className="Icon" onClick={togglePassward}/> : 
+              <BsFillEyeSlashFill className="Icon" onClick={togglePassward}/>}
+            </Form.Label>
             <Form.Control
               size="lg"
-              type="password"
+              type= {showPassward? "text" : "password"}
               value={fields.password}
               onChange={handleFieldChange}
             />
@@ -122,7 +131,7 @@ export default function Signup() {
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               size="lg"
-              type="password"
+              type={showPassward? "text" : "password"}
               onChange={handleFieldChange}
               value={fields.confirmPassword}
             />
