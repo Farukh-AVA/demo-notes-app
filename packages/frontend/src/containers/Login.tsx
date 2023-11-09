@@ -4,6 +4,7 @@ import Stack from "react-bootstrap/Stack";
 import { BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs";
 import LoaderButton from "../components/LoaderButton.tsx";
 import { Auth } from "aws-amplify";
+import { Link } from "react-router-dom";
 import { useAppContext } from "../lib/contextLib";
 import { onError } from "../lib/errorLib";
 import { useFormFields } from "../lib/hooksLib";
@@ -68,6 +69,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
               
             /> 
           </Form.Group>
+          <Link to="/login/reset">Forgot password?</Link>
           <LoaderButton
             size="lg"
             type="submit"

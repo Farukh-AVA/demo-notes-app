@@ -6,6 +6,7 @@ import Signup from "./containers/Signup.tsx";
 import NewNote from "./containers/NewNote.tsx";
 import Notes from "./containers/Notes.tsx";
 import Settings from "./containers/Settings.tsx";
+import ResetPassword from "./containers/ResetPassword";
 import AuthenticatedRoute from "./components/AuthenticatedRoute.tsx";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute.tsx";
 
@@ -26,6 +27,14 @@ export default function Links() {
         element={
           <UnauthenticatedRoute>
             <Signup />
+          </UnauthenticatedRoute>
+        }
+      />
+      <Route
+        path="/login/reset"
+        element={
+          <UnauthenticatedRoute>
+            <ResetPassword />
           </UnauthenticatedRoute>
         }
       />
