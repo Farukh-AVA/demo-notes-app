@@ -17,14 +17,14 @@ export default function Login() {
   });
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassward, setShowPassward] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false); 
 
   function validateForm() {
     return fields.email.length > 0 && fields.password.length > 0;
   }
 
-  function togglePassward(){
-    setShowPassward(prevShowPassward => !prevShowPassward)
+  function togglePassword(){
+    setShowPassword(prevShowPassword => !prevShowPassword)
   }
 
 async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -58,12 +58,12 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>
-              Password {showPassward ? <BsFillEyeFill className="Icon" onClick={togglePassward}/> : 
-              <BsFillEyeSlashFill className="Icon" onClick={togglePassward}/>}
+              Password {showPassword ? <BsFillEyeFill className="Icon" onClick={togglePassword}/> : 
+              <BsFillEyeSlashFill className="Icon" onClick={togglePassword}/>}
             </Form.Label>
             <Form.Control
               size="lg"
-              type={showPassward? "text" : "password"}
+              type={showPassword? "text" : "password"}
               value={fields.password}
               onChange={handleFieldChange}
               

@@ -20,14 +20,14 @@ export default function ResetPassword() {
   const [confirmed, setConfirmed] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
-  const [showPassward, setShowPassward] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false); 
 
   function validateCodeForm() {
     return fields.email.length > 0;
   }
 
-  function togglePassward(){
-    setShowPassward(prevShowPassward => !prevShowPassward)
+  function togglePassword(){
+    setShowPassword(prevShowPassword => !prevShowPassword)
   }
 
   function validateResetForm() {
@@ -113,11 +113,11 @@ export default function ResetPassword() {
         <hr />
         <FormGroup controlId="password">
             <Form.Label>
-              New Password {showPassward ? <BsFillEyeFill className="ResetIcon" onClick={togglePassward}/> : 
-              <BsFillEyeSlashFill className="ResetIcon" onClick={togglePassward}/>}
+              New Password {showPassword ? <BsFillEyeFill className="ResetIcon" onClick={togglePassword}/> : 
+              <BsFillEyeSlashFill className="ResetIcon" onClick={togglePassword}/>}
             </Form.Label>
           <FormControl
-            type={showPassward? "text" : "password"}
+            type={showPassword? "text" : "password"}
             value={fields.password}
             onChange={handleFieldChange}
           />
@@ -127,7 +127,7 @@ export default function ResetPassword() {
               Confirm Password 
             </Form.Label>
           <FormControl
-            type={showPassward? "text" : "password"}
+            type={showPassword? "text" : "password"}
             value={fields.confirmPassword}
             onChange={handleFieldChange}
           />

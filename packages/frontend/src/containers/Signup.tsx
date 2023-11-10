@@ -22,7 +22,7 @@ export default function Signup() {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
-  const [showPassward, setShowPassward] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false); 
 
   function validateForm() {
     return (
@@ -36,8 +36,8 @@ export default function Signup() {
     return fields.confirmationCode.length > 0;
   }
 
-  function togglePassward(){
-    setShowPassward(prevShowPassward => !prevShowPassward)
+  function togglePassword(){
+    setShowPassword(prevShowPassword => !prevShowPassword)
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -117,12 +117,12 @@ export default function Signup() {
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>
-              Password {showPassward ? <BsFillEyeFill className="Icon" onClick={togglePassward}/> : 
-              <BsFillEyeSlashFill className="Icon" onClick={togglePassward}/>}
+              Password {showPassword ? <BsFillEyeFill className="Icon" onClick={togglePassword}/> : 
+              <BsFillEyeSlashFill className="Icon" onClick={togglePassword}/>}
             </Form.Label>
             <Form.Control
               size="lg"
-              type= {showPassward? "text" : "password"}
+              type= {showPassword? "text" : "password"}
               value={fields.password}
               onChange={handleFieldChange}
             />
@@ -131,7 +131,7 @@ export default function Signup() {
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               size="lg"
-              type={showPassward? "text" : "password"}
+              type={showPassword? "text" : "password"}
               onChange={handleFieldChange}
               value={fields.confirmPassword}
             />
