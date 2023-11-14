@@ -47,7 +47,7 @@ It's built using React.js and AWS [Serverless](https://aws.amazon.com/serverless
 
 ## Getting Started
 To get started with Scratch, follow these steps:
-1. Clone the repository: `git clone https://github.com/yourusername/scratch.git`
+1. Clone the repository: `git clone https://github.com/farukh-ava/scratch.git`
 2. Install dependencies: `cd scratch && npm install`
 3. Configure AWS services, including Amazon Cognito, DynamoDB, and S3.
 4. Set up Stripe for payment processing.
