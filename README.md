@@ -1,6 +1,6 @@
 # Scratch
 
-Scratch is a production-ready web application that provides users a platform to create and manage notes, handle attachments, process payments, and more. 
+Scratch is a production-ready web application that provides a platform to create and manage notes, handle attachments, process payments. 
 It's built using React.js and AWS [Serverless](https://aws.amazon.com/serverless/) Services to ensure a secure, scalable, and responsive user experience.
 
 [Demo Scratch](https://d4f04oupe2t71.cloudfront.net/)  
