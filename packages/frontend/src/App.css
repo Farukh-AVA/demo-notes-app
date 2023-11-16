@@ -1,2 +1,32 @@
 .App {
+   
+}
+
+.custom-toggle.react-toggle .react-toggle-track {
+    border: 1px solid #333;
+    background-color: white;
+}
+
+.custom-toggle.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: white !important;
+}
+
+.BlackIcon{
+    margin-top: -3px;
+    font-size: 17px;
+}
+
+.WhiteIcon{
+    margin-top: -3px;
+    margin-left: -5px;
+    font-size: 17px;
+}
+
+.WhiteHeader{
+    color: white !important;
+    font-weight: bold; 
+}
+
+.NavWhiteFont{
+    color: white !important;
 }
