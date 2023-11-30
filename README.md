@@ -31,7 +31,7 @@ It's built using React.js and AWS [Serverless](https://aws.amazon.com/serverless
 
 - **Content Delivery:** CloudFront serves the app content, ensuring fast and reliable delivery.
 
-- **Authentication:** Amazon Cognito is used for user authentication authorization and securing APIs.
+- **Authentication:** Amazon Cognito Userpool and Cognito Authorizer are used for user and services authentication authorization and securing APIs.
 
 - **Database:** DynamoDB stores the app's data efficiently.
 
