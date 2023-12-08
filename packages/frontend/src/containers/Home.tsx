@@ -67,7 +67,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>Scratch</h1>
-        <p className="text-muted">A simple note taking app</p>
+        <p className="text-muted">A note taking app with file storage</p>
       </div>
     );
   }

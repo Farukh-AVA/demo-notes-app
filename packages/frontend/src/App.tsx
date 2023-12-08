@@ -54,7 +54,7 @@ function App() {
           <LinkContainer to="/">
             <Navbar.Brand className={darkMode ? "WhiteHeader" : "fw-bold text-muted"}>Scratch</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle />
+          <Navbar.Toggle className={darkMode ? "NavyToggleWhiteFont" : ""}/>
           <Navbar.Collapse className="justify-content-end">
             <Nav activeKey={window.location.pathname}>
               {isAuthenticated ? (
