@@ -7,13 +7,16 @@ import { API } from "aws-amplify";
 import { NoteType } from "../types/note";
 import { onError } from "../lib/errorLib";
 import { s3Upload } from "../lib/awsLib";
+import { useAppContext } from "../lib/contextLib";
 import "./NewNote.css";
+import "./dark-mode-form.css"
 
 export default function NewNote() {
   const file = useRef<null | File>(null);
   const nav = useNavigate();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { darkMode } = useAppContext();
 
   function validateForm() {
     return content.length > 0;
@@ -57,19 +60,29 @@ export default function NewNote() {
     }
   }
 
+  const darkModeButtonStyles = {
+    backgroundColor: '#555',
+    color: 'white',
+  };
+  const emptyStyles = {};
   return (
     <div className="NewNote">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className={darkMode? "dark-mode-form" : ""}>
         <Form.Group controlId="content">
           <Form.Control
             value={content}
             as="textarea"
             onChange={(e) => setContent(e.target.value)}
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
           />
         </Form.Group>
-        <Form.Group className="mt-2" controlId="file">
+        <Form.Group className="mt-2" controlId="file" >
           <Form.Label>Attachment</Form.Label>
-          <Form.Control onChange={handleFileChange} type="file" />
+          <Form.Control 
+            onChange={handleFileChange} 
+            type="file"  
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
+          />
         </Form.Group>
         <LoaderButton
           size="lg"
@@ -77,6 +90,7 @@ export default function NewNote() {
           variant="primary"
           isLoading={isLoading}
           disabled={!validateForm()}
+          style={darkMode ? darkModeButtonStyles : emptyStyles}
         >
           Create
         </LoaderButton>

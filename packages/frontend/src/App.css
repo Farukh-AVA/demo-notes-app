@@ -32,6 +32,7 @@
     
 }
 
-.NavyToggleWhiteFont{
-    background-color: white
+.NavToggleWhiteFont{
+    background-color: white !important;
+
 }

@@ -11,6 +11,7 @@ import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { onError } from "./lib/errorLib";
 import "./App.css";
+import "./index.css"
 
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -20,6 +21,19 @@ function App() {
   useEffect(() => {
     onLoad();
   }, []);
+
+  useEffect(() => {
+    if(darkMode){
+      document.body.style.backgroundColor = '#333';
+      document.documentElement.style.backgroundColor = '#333';
+    } else {
+      document.body.style.backgroundColor = '#ffffff';
+      document.documentElement.style.backgroundColor = '#ffffff';
+    }
+  
+  }, [darkMode]);
+
+
   const nav = useNavigate(); 
  
   async function onLoad() {
@@ -54,7 +68,7 @@ function App() {
           <LinkContainer to="/">
             <Navbar.Brand className={darkMode ? "WhiteHeader" : "fw-bold text-muted"}>Scratch</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle className={darkMode ? "NavyToggleWhiteFont" : ""}/>
+          <Navbar.Toggle  className={darkMode ? "NavToggleWhiteFont" : ""}/>
           <Navbar.Collapse className="justify-content-end">
             <Nav activeKey={window.location.pathname}>
               {isAuthenticated ? (
@@ -84,7 +98,7 @@ function App() {
                   />
         </Navbar>
         <AppContext.Provider
-          value={{ isAuthenticated, userHasAuthenticated } as AppContextType}
+          value={{ isAuthenticated, userHasAuthenticated, darkMode, setDarkMode} as AppContextType}
         >
           <Routes />
         </AppContext.Provider>

@@ -9,6 +9,9 @@ import Stack from "react-bootstrap/Stack";
 import LoaderButton from "../components/LoaderButton";
 import { s3Upload } from "../lib/awsLib";
 import "./Notes.css";
+import "./Dark-mode-form.css"
+import { useAppContext } from "../lib/contextLib";
+
 
 export default function Notes() {
   const file = useRef<null | File>(null)
@@ -18,6 +21,7 @@ export default function Notes() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const { darkMode } = useAppContext();
 
   useEffect(() => {
     function loadNote() {
@@ -121,11 +125,18 @@ export default function Notes() {
       setIsDeleting(false);
     }
   }
+
+  const darkModeButtonStyles = {
+    backgroundColor: '#555',
+    color: 'white',
+  };
   
+  const emptyStyles = {};
+
   return (
     <div className="Notes">
       {note && (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className={darkMode? "dark-mode-form" : ""}>
           <Stack gap={3}>
             <Form.Group controlId="content">
               <Form.Control
@@ -133,6 +144,7 @@ export default function Notes() {
                 as="textarea"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                style={darkMode ? darkModeButtonStyles : emptyStyles}
               />
             </Form.Group>
             <Form.Group className="mt-2" controlId="file">
@@ -148,7 +160,11 @@ export default function Notes() {
                   </a>
                 </p>
               )}
-              <Form.Control onChange={handleFileChange} type="file" />
+              <Form.Control 
+                onChange={handleFileChange} 
+                type="file" 
+                style={darkMode ? darkModeButtonStyles : emptyStyles}
+                />
             </Form.Group>
             <Stack gap={1}>
               <LoaderButton
@@ -156,6 +172,7 @@ export default function Notes() {
                 type="submit"
                 isLoading={isLoading}
                 disabled={!validateForm()}
+                
               >
                 Save
               </LoaderButton>

@@ -8,3 +8,23 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
   }
+
+  .lender-h1-light{
+    color: azure;
+  }
+
+  .lender-p-light{
+    color: antiquewhite;
+  }
+
+  .darck-mode{
+    background-color:#333;
+  }
+  
+  .notes-h2-light{
+    color: azure;
+    padding-bottom: 1rem; /* Equivalent to pb-3 */
+    margin-top: 1.5rem;   /* Equivalent to mt-4 */
+    margin-bottom: 1rem;  /* Equivalent to mb-3 */
+    border-bottom: 1px solid azure; /* Equivalent to border-bottom */
+  }

@@ -1,0 +1,24 @@
+    /* In your CSS file or component styles */
+    .dark-mode-form {
+        color: white; /* Text color */
+        background-color: #333; /* Background color */
+        border-radius: 8px;
+      }
+      
+      .dark-mode-form label {
+        color: white; /* Label text color */
+      }
+      
+      .dark-mode-form input,
+      .dark-mode-form textarea,
+      .dark-mode-form select {
+        background-color: #555; /* Input background color */
+        color: white; /* Input text color */
+      }
+
+      .dark-mode-form button {
+        background-color: #555; /* Button background color */
+        color: white; /* Button text color */
+        margin-bottom: 10px;
+      }
+      

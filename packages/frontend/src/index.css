@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /*background-color: #242424;*/ 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,7 +27,7 @@ a:hover {
 body {
   margin: 0;
   padding: 0;
-  color: #333;
+  /*--=background-color: #333;*/
   font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -58,6 +58,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/**
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -71,6 +72,8 @@ button:focus-visible {
   }
   
 }
+**/ 
+
 select.form-control,
 textarea.form-control,
 input.form-control {

@@ -10,6 +10,7 @@ import { ISignUpResult } from "amazon-cognito-identity-js";
 import { BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs";
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
+import "./dark-mode-form.css"
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
@@ -19,7 +20,7 @@ export default function Signup() {
     confirmationCode: "",
   });
   const nav = useNavigate();
-  const { userHasAuthenticated } = useAppContext();
+  const { userHasAuthenticated, darkMode } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [newUser, setNewUser] = useState<null | ISignUpResult>(null);
   const [showPassword, setShowPassword] = useState(false); 
@@ -72,9 +73,14 @@ export default function Signup() {
     }
   }
 
+  const darkModeButtonStyles = {
+    backgroundColor: '#555',
+    color: 'white',
+  };
+  const emptyStyles = {};
   function renderConfirmationForm() {
     return (
-      <Form onSubmit={handleConfirmationSubmit}>
+      <Form onSubmit={handleConfirmationSubmit} className={darkMode? "dark-mode-form" : ""}>
         <Stack gap={3}>
           <Form.Group controlId="confirmationCode">
             <Form.Label>Confirmation Code</Form.Label>
@@ -84,6 +90,7 @@ export default function Signup() {
               type="tel"
               onChange={handleFieldChange}
               value={fields.confirmationCode}
+              style={darkMode ? darkModeButtonStyles : emptyStyles}
             />
             <Form.Text muted>Please check your email for the code.</Form.Text>
           </Form.Group>
@@ -103,7 +110,7 @@ export default function Signup() {
 
   function renderForm() {
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className={darkMode? "dark-mode-form" : ""}>
         <Stack gap={3}>
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
@@ -113,6 +120,7 @@ export default function Signup() {
               type="email"
               value={fields.email}
               onChange={handleFieldChange}
+              style={darkMode ? darkModeButtonStyles : emptyStyles}
             />
           </Form.Group>
           <Form.Group controlId="password">
@@ -125,6 +133,7 @@ export default function Signup() {
               type= {showPassword? "text" : "password"}
               value={fields.password}
               onChange={handleFieldChange}
+              style={darkMode ? darkModeButtonStyles : emptyStyles}
             />
           </Form.Group>
           <Form.Group controlId="confirmPassword">
@@ -134,6 +143,7 @@ export default function Signup() {
               type={showPassword? "text" : "password"}
               onChange={handleFieldChange}
               value={fields.confirmPassword}
+              style={darkMode ? darkModeButtonStyles : emptyStyles}
             />
           </Form.Group>
           <LoaderButton

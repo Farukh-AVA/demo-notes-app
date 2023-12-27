@@ -5,7 +5,9 @@ import { useFormFields } from "../lib/hooksLib";
 import { Token, StripeError } from "@stripe/stripe-js";
 import LoaderButton from "../components/LoaderButton";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useAppContext } from "../lib/contextLib";
 import "./BillingForm.css";
+import "../containers/dark-mode-form.css"
 
 export interface BillingFormType {
   isLoading: boolean;
@@ -24,6 +26,7 @@ export function BillingForm({ isLoading, onSubmit }: BillingFormType) {
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCardComplete, setIsCardComplete] = useState(false);
+  const { darkMode } = useAppContext();
 
   isLoading = isProcessing || isLoading;
 
@@ -65,8 +68,13 @@ export function BillingForm({ isLoading, onSubmit }: BillingFormType) {
     onSubmit(fields.storage, { token, error });
   }
 
+  const darkModeButtonStyles = {
+    backgroundColor: '#555',
+    color: 'white',
+  };
+  const emptyStyles = {};
   return (
-    <Form className="BillingForm" onSubmit={handleSubmitClick}>
+    <Form className={darkMode? "dark-mode-form" : "BillingForm"} onSubmit={handleSubmitClick}>
       <Form.Group controlId="storage">
         <Form.Label>Storage</Form.Label>
         <Form.Control
@@ -76,6 +84,7 @@ export function BillingForm({ isLoading, onSubmit }: BillingFormType) {
           value={fields.storage}
           onChange={handleFieldChange}
           placeholder="Number of notes to store"
+          style={darkMode ? darkModeButtonStyles : emptyStyles}
         />
       </Form.Group>
       <hr />
@@ -88,6 +97,7 @@ export function BillingForm({ isLoading, onSubmit }: BillingFormType) {
             value={fields.name}
             onChange={handleFieldChange}
             placeholder="Name on the card"
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
           />
         </Form.Group>
         <div>
@@ -95,16 +105,20 @@ export function BillingForm({ isLoading, onSubmit }: BillingFormType) {
           <CardElement
             className="card-field"
             onChange={(e) => setIsCardComplete(e.complete)}
+           
+
             options={{
               style: {
                 base: {
                   fontSize: "16px",
                   fontWeight: "400",
-                  color: "#495057",
+                  color: darkMode ? "white" : "#495057",
                   fontFamily: "'Open Sans', sans-serif",
                 },
               },
+              
             }}
+            
           />
         </div>
         <LoaderButton

@@ -7,7 +7,9 @@ import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
+import { useAppContext } from "../lib/contextLib";
 import "./ResetPassword.css";
+import "./dark-mode-form.css"
 
 export default function ResetPassword() {
   const [fields, handleFieldChange] = useFormFields({
@@ -21,6 +23,7 @@ export default function ResetPassword() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
   const [showPassword, setShowPassword] = useState(false); 
+  const { darkMode } = useAppContext();
 
   function validateCodeForm() {
     return fields.email.length > 0;
@@ -70,16 +73,23 @@ export default function ResetPassword() {
     }
   }
 
+  const darkModeButtonStyles = {
+    backgroundColor: '#555',
+    color: 'white',
+  };
+  const emptyStyles = {};
+
   function renderRequestCodeForm() {
     return (
-      <form onSubmit={handleSendCodeClick}>
+      <form onSubmit={handleSendCodeClick} className={darkMode? "dark-mode-form" : ""}>
         <FormGroup controlId="email">
-          <Form.Text>Email</Form.Text>
+          <Form.Text style={darkMode ? { color: 'white', fontSize: '20px' } : {fontSize: '20px'}}>Email</Form.Text>
           <FormControl
             autoFocus
             type="email"
             value={fields.email}
             onChange={handleFieldChange}
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
           />
         </FormGroup>
         <LoaderButton
@@ -97,7 +107,7 @@ export default function ResetPassword() {
 
   function renderConfirmationForm() {
     return (
-      <form onSubmit={handleConfirmClick}>
+      <form onSubmit={handleConfirmClick} className={darkMode? "dark-mode-form" : ""}>
         <FormGroup controlId="code">
           <Form.Label>Confirmation Code</Form.Label>
           <FormControl
@@ -105,8 +115,9 @@ export default function ResetPassword() {
             type="tel"
             value={fields.code}
             onChange={handleFieldChange}
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
           />
-          <Form.Text>
+          <Form.Text style={darkMode ? { color: 'white'} : emptyStyles}>
             Please check your email ({fields.email}) for the confirmation code.
           </Form.Text>
         </FormGroup>
@@ -120,6 +131,7 @@ export default function ResetPassword() {
             type={showPassword? "text" : "password"}
             value={fields.password}
             onChange={handleFieldChange}
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
           />
         </FormGroup>
         <FormGroup controlId="confirmPassword">
@@ -130,6 +142,7 @@ export default function ResetPassword() {
             type={showPassword? "text" : "password"}
             value={fields.confirmPassword}
             onChange={handleFieldChange}
+            style={darkMode ? darkModeButtonStyles : emptyStyles}
           />
         </FormGroup>
         <LoaderButton

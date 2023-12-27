@@ -9,13 +9,14 @@ import { useAppContext } from "../lib/contextLib";
 import { onError } from "../lib/errorLib";
 import { useFormFields } from "../lib/hooksLib";
 import "./Login.css";
+import "./dark-mode-form.css"
 
 export default function Login() {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
   });
-  const { userHasAuthenticated } = useAppContext();
+  const { userHasAuthenticated, darkMode } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); 
 
@@ -42,9 +43,16 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
       
     
 }
+
+const darkModeButtonStyles = {
+  backgroundColor: '#555',
+  color: 'white',
+};
+
+const emptyStyles = {};
   return (
     <div className="Login">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className={darkMode? "dark-mode-form" : ""}>
         <Stack gap={3}>
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
@@ -54,6 +62,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
               type="email"
               value={fields.email}
               onChange={handleFieldChange}
+              style={darkMode ? darkModeButtonStyles : emptyStyles}
             />
           </Form.Group>
           <Form.Group controlId="password">
@@ -66,6 +75,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
               type={showPassword? "text" : "password"}
               value={fields.password}
               onChange={handleFieldChange}
+              style={darkMode ? darkModeButtonStyles : emptyStyles}
               
             /> 
           </Form.Group>

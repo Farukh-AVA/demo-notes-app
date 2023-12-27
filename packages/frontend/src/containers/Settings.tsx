@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { BillingForm, BillingFormType } from "../components/BillingForm";
 
+
 const stripePromise = loadStripe(config.STRIPE_KEY);
 
 import "./Settings.css";
@@ -17,6 +18,7 @@ export default function Settings() {
   
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  
 
   function billUser(details: BillingType) {
     return API.post("notes", "/billing", {
