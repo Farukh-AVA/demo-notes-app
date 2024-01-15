@@ -11,6 +11,7 @@ import { s3Upload } from "../lib/awsLib";
 import "./Notes.css";
 import "./Dark-mode-form.css"
 import { useAppContext } from "../lib/contextLib";
+import Loader from "../components/Loader.tsx";
 
 
 export default function Notes() {
@@ -135,7 +136,7 @@ export default function Notes() {
 
   return (
     <div className="Notes">
-      {note && (
+      {!note ? <Loader/> : (
         <Form onSubmit={handleSubmit} className={darkMode? "dark-mode-form" : ""}>
           <Stack gap={3}>
             <Form.Group controlId="content">

@@ -6,6 +6,7 @@ import { NoteType } from "../types/note";
 import { onError } from "../lib/errorLib";
 import { BsPencilSquare } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
+import Loader from "../components/Loader.tsx";
 import "./Home.css";
 import "../index.css"
 
@@ -13,7 +14,7 @@ export default function Home() {
   const [notes, setNotes] = useState<Array<NoteType>>([]);
   const { isAuthenticated, darkMode } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
-  console.log(darkMode); 
+   
 
  
   useEffect(() => {
@@ -79,7 +80,9 @@ export default function Home() {
     return (
       <div className="notes">
         <h2 className={darkMode ? "notes-h2-light" : "pb-3 mt-4 mb-3 border-bottom"}>Your Notes</h2>
-        <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
+        <ListGroup>{isLoading 
+          ? <Loader />
+          : !isLoading && renderNotesList(notes)}</ListGroup>
       </div>
     );
   }
