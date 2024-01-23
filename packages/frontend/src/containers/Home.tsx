@@ -14,8 +14,8 @@ export default function Home() {
   const [notes, setNotes] = useState<Array<NoteType>>([]);
   const { isAuthenticated, darkMode } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
-   
-
+  const sortedNotes = notes.sort((a,b) => Number(b.createdAt) - Number(a.createdAt));  
+  
  
   useEffect(() => {
     async function onLoad() {
@@ -82,7 +82,7 @@ export default function Home() {
         <h2 className={darkMode ? "notes-h2-light" : "pb-3 mt-4 mb-3 border-bottom"}>Your Notes</h2>
         <ListGroup>{isLoading 
           ? <Loader />
-          : !isLoading && renderNotesList(notes)}</ListGroup>
+          : !isLoading && renderNotesList(sortedNotes)}</ListGroup>
       </div>
     );
   }
