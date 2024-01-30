@@ -10,6 +10,8 @@ import { AppContext, AppContextType } from "./lib/contextLib";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { onError } from "./lib/errorLib";
+import CloudnoteDark from "./assets/CloudnoteDark.png"
+import CloudnoteLight from "./assets/CloudnoteLight.png"
 import "./App.css";
 import "./index.css"
 
@@ -61,12 +63,24 @@ function App() {
     setDarkMode(!darkMode);
   }
 //fw-bold text-muted
+/* 
+<LinkContainer to="/">
+  <Navbar.Brand className={darkMode ? "WhiteHeader" : "fw-bold text-muted"}>CloudNotes</Navbar.Brand>
+</LinkContainer>    
+*/
   return (
     !isAuthenticating && (
       <div className="App container py-3">
         <Navbar collapseOnSelect bg={darkMode ? "dark" : "light"} expand="md" className="mb-3 px-3">
-          <LinkContainer to="/">
-            <Navbar.Brand className={darkMode ? "WhiteHeader" : "fw-bold text-muted"}>Scratch</Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand >
+              <img
+                src={darkMode ? CloudnoteLight : CloudnoteDark}
+                width="50"
+                height="auto"
+                alt="Cloud note logo"
+              />
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle  className={darkMode ? "NavToggleWhiteFont" : ""}/>
           <Navbar.Collapse className="justify-content-end">

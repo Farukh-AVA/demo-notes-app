@@ -7,6 +7,8 @@ import { onError } from "../lib/errorLib";
 import { BsPencilSquare } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader.tsx";
+import CloudnoteDark from "../assets/CloudnoteDark.png"
+import { Image } from 'react-bootstrap';
 import "./Home.css";
 import "../index.css"
 
@@ -70,8 +72,8 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1 className={darkMode ? "lender-h1-light" : ""}>Scratch</h1>
-        <p className={darkMode ? "lender-p-light" : ""}>A note taking app with file storage</p>
+        <Image src={CloudnoteDark} alt="Cloud notes dark logo" fluid style={{ maxWidth: '300px', height: 'auto' }}/>
+        <p className={darkMode ? "lender-p-light" : "lender-p-dark"}>A note taking app with file storage</p>
       </div>
     );
   }

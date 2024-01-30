@@ -14,7 +14,15 @@
   }
 
   .lender-p-light{
-    color: antiquewhite;
+    margin-top: 20px;
+    font-size: large;
+    color: azure;
+  }
+
+  .lender-p-dark{
+    margin-top: 20px;
+    font-size: large;
+    color: black;
   }
 
   .darck-mode{
