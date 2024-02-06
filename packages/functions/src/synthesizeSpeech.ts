@@ -21,8 +21,9 @@ export const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
 
   const params = {
     Text: data.content,
-    VoiceId: 'Joanna',
+    VoiceId: 'Danielle',
     OutputFormat: 'mp3',
+    Engine: 'long-form'
   };
 
   let audioData: Buffer[] = [];
