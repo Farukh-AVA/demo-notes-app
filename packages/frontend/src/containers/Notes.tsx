@@ -24,11 +24,11 @@ export default function Notes() {
   const [isDeleting, setIsDeleting] = useState(false);
   const { darkMode } = useAppContext();
 
+
   useEffect(() => {
     function loadNote() {
       return API.get("notes", `/notes/${id}`, {});
-    }
-
+    } 
     async function onLoad() {
       try {
         const note = await loadNote();

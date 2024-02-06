@@ -21,6 +21,7 @@ export function ApiStack({ stack }: StackContext) {
       "PUT /notes/{id}": "packages/functions/src/update.main",
       "DELETE /notes/{id}": "packages/functions/src/delete.main",
       "POST /billing": "packages/functions/src/billing.main",
+      "POST /synthesize-speech": "packages/functions/src/synthesizeSpeech.main",
     },
   });
 
