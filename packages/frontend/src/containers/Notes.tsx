@@ -23,6 +23,7 @@ export default function Notes() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { darkMode } = useAppContext();
+  const [isListingNote, setIsListingNote] = useState(false); 
 
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Notes() {
     } 
     async function onLoad() {
       try {
-        const note = await loadNote();
+        const note = await loadNote(); 
         const { content, attachment } = note;
 
         if (attachment) {
@@ -90,7 +91,7 @@ export default function Notes() {
         attachment = note.attachment;
       }
   
-      await saveNote({
+       await saveNote({
         content: content,
         attachment: attachment,
       });
@@ -104,6 +105,9 @@ export default function Notes() {
   function deleteNote() {
     return API.del("notes", `/notes/${id}`, {});
   }
+
+
+  
   
   async function handleDelete(event: React.FormEvent<HTMLModElement>) {
     event.preventDefault();
@@ -124,6 +128,28 @@ export default function Notes() {
     } catch (e) {
       onError(e);
       setIsDeleting(false);
+    }
+  }
+
+  function listenNote(note: NoteType) {
+    return API.post("notes", `/synthesize-speech`, {
+      body: note,
+    });
+  }
+
+  async function handleListenNote(event: React.FormEvent<HTMLModElement>) {
+    event.preventDefault();
+  
+    setIsListingNote(true);
+  
+    try {
+      const base64 = await listenNote({content: content});
+      console.log('base64', base64);
+      //nav("/");
+      setIsListingNote(false);
+    } catch (e) {
+      onError(e);
+      setIsListingNote(false);
     }
   }
 
@@ -168,12 +194,19 @@ export default function Notes() {
                 />
             </Form.Group>
             <Stack gap={1}>
+            <LoaderButton
+                size="lg"
+                variant="danger"
+                onClick={handleListenNote}
+                isLoading={isListingNote}
+              >
+                Listen Note
+              </LoaderButton>
               <LoaderButton
                 size="lg"
                 type="submit"
                 isLoading={isLoading}
-                disabled={!validateForm()}
-                
+                disabled={!validateForm()}       
               >
                 Save
               </LoaderButton>

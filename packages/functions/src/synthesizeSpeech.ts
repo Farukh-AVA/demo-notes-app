@@ -35,7 +35,7 @@ export const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
     data.AudioStream?.on('data', (chunk: Buffer) => {
       audioData.push(chunk);
     });
-
+/*
     // Log when the stream ends
     data.AudioStream?.on('end', () => {
       
@@ -45,7 +45,21 @@ export const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
       // Now you can use `base64Audio` as needed (e.g., send it to the frontend)
       console.log('Base64 Audio:', base64Audio);
     });
+*/ 
+    // Wait for the audio stream to end
+    await new Promise<void>((resolve, reject) => {
+      data.AudioStream?.on('end', () => {
+        console.log('Finished streaming audio');
+        resolve();
+      });
+      data.AudioStream?.on('error', (error: Error) => {
+        console.error('Error streaming audio:', error);
+        reject(error);
+      });
+    });
 
+    // Convert the concatenated audio data to Base64
+    const base64Audio = Buffer.concat(audioData).toString('base64');
     return {
       statusCode: 200,
       body: JSON.stringify({
