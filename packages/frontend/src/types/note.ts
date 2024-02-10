@@ -4,4 +4,5 @@ export interface NoteType {
     createdAt?: string;
     attachment?: string;
     attachmentURL?: string;
+    audio?: string; 
   }

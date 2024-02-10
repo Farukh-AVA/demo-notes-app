@@ -23,13 +23,21 @@ export default function Notes() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { darkMode } = useAppContext();
-  const [isListingNote, setIsListingNote] = useState(false); 
-
+  //const [isListingNote, setIsListingNote] = useState(false);
+  const [audioData, setAudioData] = useState(null); 
+  console.log(audioData); 
 
   useEffect(() => {
     function loadNote() {
       return API.get("notes", `/notes/${id}`, {});
-    } 
+    }
+
+    function loadAudioData(note: NoteType) {
+      return API.post("notes", `/synthesize-speech`, {
+        body: note,
+      });
+    }
+
     async function onLoad() {
       try {
         const note = await loadNote(); 
@@ -38,9 +46,13 @@ export default function Notes() {
         if (attachment) {
           note.attachmentURL = await Storage.vault.get(attachment);
         }
+        if(content){
+          note.audio = await loadAudioData({content:content})
+        }
 
         setContent(content);
         setNote(note);
+        setAudioData(note.audio); 
       } catch (e) {
         onError(e);
       }
@@ -130,7 +142,7 @@ export default function Notes() {
       setIsDeleting(false);
     }
   }
-
+/** 
   function listenNote(note: NoteType) {
     return API.post("notes", `/synthesize-speech`, {
       body: note,
@@ -152,7 +164,7 @@ export default function Notes() {
       setIsListingNote(false);
     }
   }
-
+*/
   const darkModeButtonStyles = {
     backgroundColor: '#555',
     color: 'white',
@@ -194,6 +206,7 @@ export default function Notes() {
                 />
             </Form.Group>
             <Stack gap={1}>
+          {/** 
             <LoaderButton
                 size="lg"
                 variant="danger"
@@ -202,6 +215,7 @@ export default function Notes() {
               >
                 Listen Note
               </LoaderButton>
+              */}  
               <LoaderButton
                 size="lg"
                 type="submit"
