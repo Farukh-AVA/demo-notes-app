@@ -23,6 +23,7 @@ export function AuthStack({ stack, app }: StackContext) {
         bucket.bucketArn + "/private/${cognito-identity.amazonaws.com:sub}/*",
       ],
     }),
+    
   ]);
 
   // Show the auth resources in the output

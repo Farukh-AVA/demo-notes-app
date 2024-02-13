@@ -12,6 +12,7 @@ export function ApiStack({ stack }: StackContext) {
       function: {
     //This will allow our API to access our table    
         bind: [table, STRIPE_SECRET_KEY],
+        
       },
     },
     routes: {

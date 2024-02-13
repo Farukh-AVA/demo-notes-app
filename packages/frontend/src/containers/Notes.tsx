@@ -12,6 +12,7 @@ import "./Notes.css";
 import "./Dark-mode-form.css"
 import { useAppContext } from "../lib/contextLib";
 import Loader from "../components/Loader.tsx";
+import AudioPlayer from "../components/AudioPlay.tsx";
 
 
 export default function Notes() {
@@ -23,9 +24,8 @@ export default function Notes() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { darkMode } = useAppContext();
-  //const [isListingNote, setIsListingNote] = useState(false);
   const [audioData, setAudioData] = useState(null); 
-  console.log(audioData); 
+  
 
   useEffect(() => {
     function loadNote() {
@@ -52,7 +52,7 @@ export default function Notes() {
 
         setContent(content);
         setNote(note);
-        setAudioData(note.audio); 
+        setAudioData(note.audio.audioData); 
       } catch (e) {
         onError(e);
       }
@@ -142,29 +142,7 @@ export default function Notes() {
       setIsDeleting(false);
     }
   }
-/** 
-  function listenNote(note: NoteType) {
-    return API.post("notes", `/synthesize-speech`, {
-      body: note,
-    });
-  }
 
-  async function handleListenNote(event: React.FormEvent<HTMLModElement>) {
-    event.preventDefault();
-  
-    setIsListingNote(true);
-  
-    try {
-      const base64 = await listenNote({content: content});
-      console.log('base64', base64);
-      //nav("/");
-      setIsListingNote(false);
-    } catch (e) {
-      onError(e);
-      setIsListingNote(false);
-    }
-  }
-*/
   const darkModeButtonStyles = {
     backgroundColor: '#555',
     color: 'white',
@@ -185,6 +163,7 @@ export default function Notes() {
                 onChange={(e) => setContent(e.target.value)}
                 style={darkMode ? darkModeButtonStyles : emptyStyles}
               />
+            <AudioPlayer base64Audio={audioData}/>
             </Form.Group>
             <Form.Group className="mt-2" controlId="file">
               <Form.Label>Attachment</Form.Label>
@@ -205,17 +184,7 @@ export default function Notes() {
                 style={darkMode ? darkModeButtonStyles : emptyStyles}
                 />
             </Form.Group>
-            <Stack gap={1}>
-          {/** 
-            <LoaderButton
-                size="lg"
-                variant="danger"
-                onClick={handleListenNote}
-                isLoading={isListingNote}
-              >
-                Listen Note
-              </LoaderButton>
-              */}  
+            <Stack gap={1}> 
               <LoaderButton
                 size="lg"
                 type="submit"
