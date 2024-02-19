@@ -1,31 +1,30 @@
 
 
 import { PollyClient, SynthesizeSpeechCommand } from '@aws-sdk/client-polly';
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-
+import handler from "@notes/core/handler";
 
 const polly = new PollyClient({ region: 'us-east-1' }); // Replace with your AWS region
 
-export const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+
+export const main = handler(async (event) => {
  
-  let data = {
+  let inputData = {
     content: "",
   }; 
   
   if (event.body != null) {
-    data = JSON.parse(event.body);
+    inputData = JSON.parse(event.body);
   }
 
   const params = {
-    Text: data.content,
+    Text: inputData.content,
     VoiceId: 'Danielle',
     OutputFormat: 'mp3',
     Engine: 'long-form'
   };
 
   let audioData: Buffer[] = [];
-  let base64Audio: string | null = null;
-  try {
+  
     const data = await polly.send(new SynthesizeSpeechCommand(params));
 
     
@@ -45,22 +44,8 @@ export const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
 
     // Convert the concatenated audio data to Base64
     const base64Audio = Buffer.concat(audioData).toString('base64');
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        audioData: base64Audio,
-      }),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-      },
-    };
-  } catch (error) {
-    console.error('Error:', error);
+    
+    return JSON.stringify({audioData: base64Audio})
+     
+});
 
-    return {
-      statusCode: 500,
-      body: 'Internal Server Error',
-    };
-  }
-};

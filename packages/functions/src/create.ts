@@ -13,8 +13,6 @@ export const main = handler(async (event) => {
   if (event.body != null) {
     data = JSON.parse(event.body);
   }
-  console.log("LOOKING FOR ME?");
-  console.log("DATA:", data.content); 
   const params = {
     TableName: Table.Notes.tableName,
     Item: {
